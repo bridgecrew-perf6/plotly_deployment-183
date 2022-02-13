@@ -1,37 +1,46 @@
-// Sort the data array using the greekSearchResults value
-data.sort(function(a, b) {
-  return parseFloat(b.greekSearchResults) - parseFloat(a.greekSearchResults);
-});
+function init() {
+    var selector = d3.select("#selDataset"); //identify dropdown menu in html data set
 
-// Slice the first 10 objects for plotting
-data = data.slice(0, 10);
-
-// Reverse the array due to Plotly's defaults
-data = data.reverse();
-
-// Trace1 for the Greek Data
-var trace1 = {
-  x: data.map(row => row.greekSearchResults),
-  y: data.map(row => row.greekName),
-  text: data.map(row => row.greekName),
-  name: "Greek",
-  type: "bar",
-  orientation: "h"
+    d3.json("samples.json").then((data) => {
+        console.log(data);
+        var sampleNames = data.names; // extracts all Names from JSON object array
+        sampleNames.forEach((sample) => {
+            selector
+                .append("option")
+                .text(sample)
+                .property("value", sample) // adds each name as an <option> tag to HTML dropdown
+        });
+    });
 };
 
-// data
-var data = [trace1];
-
-// Apply the group bar mode to the layout
-var layout = {
-  title: "Greek gods search results",
-  margin: {
-    l: 100,
-    r: 100,
-    t: 100,
-    b: 100
-  }
+function optionChanged(newSample) {
+    buildMetadata(newSample);
+    // buildCharts(newSample);
 };
 
-// Render the plot to the div tag with id "plot"
-Plotly.newPlot("plot", data, layout);
+function buildMetadata(sample) {
+    d3.json("samples.json").then((data) => {
+        var metadata = data.metadata;
+        var resultArray = metadata.filter(sampleObj => sampleObj.id == sample);
+        var result = resultArray[0];
+        var PANEL = d3.select("#sample-metadata");
+
+        // [{"id": 940, "ethnicity": "Caucasian", "gender": "F", "age": 24.0, "location": "Beaufort/NC", "bbtype": "I", "wfreq": 2.0},
+        PANEL.html("");
+        // PANEL.append("h6").text(result.id);
+        // PANEL.append("h6").text(result.ethnicity);
+        // PANEL.append("h6").text(result.gender);
+        // PANEL.append("h6").text(result.age);
+        // PANEL.append("h6").text(result.location);
+        // PANEL.append("h6").text(result.bbtype);
+        // PANEL.append("h6").text(result.wfreq);
+
+        // labels = Object.keys(result);
+        // vals = Object.values(result);
+        for (let [key, name] of Object.entries(result)) {
+            PANEL.append("h6").text(`${key}: ${name}`)
+        }
+    });
+};
+
+init();
