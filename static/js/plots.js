@@ -27,7 +27,16 @@ function buildMetadata(sample) {
 
         // [{"id": 940, "ethnicity": "Caucasian", "gender": "F", "age": 24.0, "location": "Beaufort/NC", "bbtype": "I", "wfreq": 2.0},
         PANEL.html("");
+        // PANEL.append("h6").text(result.id);
+        // PANEL.append("h6").text(result.ethnicity);
+        // PANEL.append("h6").text(result.gender);
+        // PANEL.append("h6").text(result.age);
+        // PANEL.append("h6").text(result.location);
+        // PANEL.append("h6").text(result.bbtype);
+        // PANEL.append("h6").text(result.wfreq);
 
+        // labels = Object.keys(result);
+        // vals = Object.values(result);
         for (let [key, name] of Object.entries(result)) {
             PANEL.append("h6").text(`${key}: ${name}`)
         }
