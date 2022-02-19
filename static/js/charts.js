@@ -80,7 +80,7 @@ function buildCharts(sample) {
     ];
 
     var barLayout = {
-       title: 'Top 10 Bacteria Cultures Found'
+       title: {text:'<b>Top 10 Bacteria Cultures Found</b>'}, paper_bgcolor: 'rgba(154,205,50,1)'
     };
     
     Plotly.newPlot('bar', barData, barLayout)
@@ -97,9 +97,10 @@ function buildCharts(sample) {
 
     // 2. Create the layout for the bubble chart.
     var bubbleLayout = {
-      title:'Bacterial Cultures Per Sample',
+      title:{text:'<b>Bacterial Cultures Per Sample</b>'},
       hovermode: 'closest',
       xaxis: {title: 'OTU ID'},
+      paper_bgcolor: 'rgba(154,205,50,1)',
       margin: {
         l: 100,
         r: 100,
@@ -135,7 +136,8 @@ function buildCharts(sample) {
     }];
   
     var gaugeLayout = { 
-      title: {text: "<b>Belly Button Washing Frequency</b><br>Scrubs per Week"}
+      title: {text: "<b>Belly Button Washing Frequency</b><br>Scrubs per Week"},
+      paper_bgcolor: 'rgba(154,205,50,1)'
     };
 
     Plotly.newPlot('gauge', gaugeData, gaugeLayout);

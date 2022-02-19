@@ -1,5 +1,5 @@
 html,
-body,
+body {background-color: yellowgreen;}
 .jumbotron {
     color: yellow;
 }
@@ -8,4 +8,10 @@ body,
 }
 .panel-primary {
     color: black;
+}
+p {
+    text-align: center;
+}
+#intro {
+    font-size: large;
 }
