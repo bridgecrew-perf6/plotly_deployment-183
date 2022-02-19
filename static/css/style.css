@@ -1,0 +1,11 @@
+html,
+body,
+.jumbotron {
+    color: yellow;
+}
+.well {
+    color: black;
+}
+.panel-primary {
+    color: black;
+}
